@@ -1,29 +1,37 @@
 <template>
-  <span  v-if="headerMenuGuests">
-    <li class="header__nav-list" @click="switchMenuState">{{ headerMenuGuests[0].text }}</li>
-    <li class="header__nav-list active-login-menu" @click="changeLoginProp">{{ headerMenuGuests[1].text }}</li>
-    <li class="header__nav-list active-signup-menu" @click="changeSignUpProp">{{ headerMenuGuests[2].text }}</li>
+  <span>
+    <li class="header__nav-list" @click="switchMenuState">{{ headerMenu[0].text }}</li>
+    <li class="header__nav-list active-login-menu" @click="changeLoginComp">{{ headerMenu[1].text }}</li>
+    <li class="header__nav-list active-signup-menu" @click="changeSignUpComp">{{ headerMenu[2].text }}</li>
   </span>
 </template>
 
-<script lang="ts" scoped>
-import { Component,Prop,Vue } from 'vue-property-decorator';
-import { HeaderMenus } from '@/store/models.d';
-import { toolStoreModule } from '@/store/modules/tool';
-import { headerMenuGuests } from '@/utils/header';
-import { SIGNUP_NAME,LOGIN_NAME } from '@/utils/auth-mapping';
+<script scoped>
+import { mapState } from "vuex";
 
-@Component
-export default class GuestsUserHeaderNav extends Vue {
-
-  private headerMenuGuests: HeaderMenus[] = headerMenuGuests;
-
-  public changeLoginProp(): void{
-    toolStoreModule.changeLoginComponents(LOGIN_NAME.LOGIN);
-  }
-
-  public changeSignUpProp(): void{
-    toolStoreModule.changeSignUpComponents(SIGNUP_NAME.SIGNUP);
+export default {
+  computed: {
+    ...mapState({
+      aboutMenuState: state => state.tool.aboutMenuState
+    }),
+  },
+  props: {
+    headerMenu: {
+      type: Array,
+      required: true
+    },
+  },
+  methods: {
+    switchMenuState() {
+      this.switchingMenuState = this.aboutMenuState === false ? 'openAboutMenu' : false;
+      this.$store.dispatch("tool/changeAboutMenuState",this.switchingMenuState);
+    },
+    changeLoginComp() {
+      this.$store.dispatch("tool/setLoginUserInfo");
+    },
+    changeSignUpComp() {
+      this.$store.dispatch("tool/setSignUpCompInfo");
+    },
   }
 }
 </script>

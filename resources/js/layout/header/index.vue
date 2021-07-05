@@ -77,7 +77,7 @@ export default {
       float: right;
       position: relative;
       margin-right: 67px;
-      top: calc(70px / 2 - 25px / 2);
+      // top: calc(70px / 2 - 25px / 2);
       &-list{
       list-style-type: none;
       float: left;

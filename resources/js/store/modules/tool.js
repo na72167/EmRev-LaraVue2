@@ -1,6 +1,7 @@
 const state = {
   authComponentsState: 'signUp',
   aboutMenuState: false,
+  loading: false,
 }
 
 const getters = {
@@ -16,6 +17,12 @@ const mutations = {
   SET_SIGNUP_COMP_INFO(state) {
     state.authComponentsState = 'signUp'
   },
+  SET_LOADING() {
+    state.loading = true
+  },
+  CLEAR_LOADING(){
+    state.loading = false
+  }
 }
 
 const actions = {
@@ -27,6 +34,12 @@ const actions = {
   },
   setSignUpCompInfo (context) {
     context.commit('SET_SIGNUP_COMP_INFO');
+  },
+  setLoading (context){
+    context.commit('SET_LOADING');
+  },
+  clearLoading (context) {
+    context.commit('CLEAR_LOADING');
   }
 }
 
