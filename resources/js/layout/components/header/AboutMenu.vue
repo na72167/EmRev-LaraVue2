@@ -4,10 +4,10 @@
       <ul class="menuAbout__itemWrap">
         <!-- リンク関係 -->
         <div v-for="aboutMenu in aboutMenus" :key="aboutMenu.id">
-            <router-link
-              :to="aboutMenu.link"
-              class="menuAbout__itemWrap-lineNone"
-            >
+          <router-link
+            :to="aboutMenu.link"
+            class="menuAbout__itemWrap-lineNone"
+          >
             <li class="menuAbout__itemWrap-item" @click="switchMenuState">{{aboutMenu.text}}</li>
           </router-link>
         </div>

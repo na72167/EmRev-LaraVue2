@@ -24,7 +24,7 @@ export default {
   },
   props: {
     headerMenu: {
-      type: String,
+      type: Array,
       required: true
     },
   },

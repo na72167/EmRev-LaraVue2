@@ -35,6 +35,12 @@ return [
 
     'connections' => [
 
+      'sqlite_testing' => [
+        'driver' => 'sqlite',
+        'database' => ':memory:',
+        'prefix' => '',
+      ],
+
       'mysql' => [
           'driver' => 'mysql',
           'url' => env('DATABASE_URL'),
