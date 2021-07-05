@@ -2432,8 +2432,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/utils/applyCompany-mapping */ "./resources/js/utils/applyCompany-mapping.js");
-/* harmony import */ var _utils_validate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/utils/validate */ "./resources/js/utils/validate.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/utils/applyCompany-mapping */ "./resources/js/utils/applyCompany-mapping.js");
+/* harmony import */ var _utils_validate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/utils/validate */ "./resources/js/utils/validate.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2565,6 +2567,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
+
+_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"];
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2589,13 +2593,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       averageAnnualIncomeErrMsg: '',
       averageAgeErrMsg: '',
       applyCompanyCommonErrMsg: '',
+      applyCompanyInfo: '',
       // フラグに書き換え
       sendFlgOne: false,
       sendFlgTwo: false,
       //連続で登録処理をさせない用
       isSubmit: false,
-      submitButton: _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLY_COMPANY_BUTTON"].REGISTER_BUTTON,
-      cancelButton: _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLY_COMPANY_BUTTON"].CANCEL_BUTTON,
+      submitButton: _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLY_COMPANY_BUTTON"].REGISTER_BUTTON,
+      cancelButton: _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLY_COMPANY_BUTTON"].CANCEL_BUTTON,
       RegistUser: null,
       sesLimit: null,
       debug: null
@@ -2615,16 +2620,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.companyName) {
                   //未入力チェック
                   console.log("(applyCompany)会社名が未入力です");
-                  _this.companyNameErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["CompanyNameFormErrMsg"].CompanyNameErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.companyName)) {
+                  _this.companyNameErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["CompanyNameFormErrMsg"].CompanyNameErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.companyName)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)会社名は半角英数字で入力してください");
                   _this.companyNameErrMsg = '会社名は半角英数字で入力してください';
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMaxLen"])(_this.companyName, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].COMPANYNAME_MAXLEN)) {
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMaxLen"])(_this.companyName, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].COMPANYNAME_MAXLEN)) {
                   // 最大文字数チェック
                   console.log("(applyCompany)会社名は20文字以内にしてください");
                   _this.companyNameErrMsg = '会社名は20文字以内にしてください';
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMinLen"])(_this.companyName, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].COMPANYNAME_MINLEN)) {
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMinLen"])(_this.companyName, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].COMPANYNAME_MINLEN)) {
                   // 最小文字数チェック
                   console.log("(applyCompany)会社名は最小4文字以内にしてください");
                   _this.companyNameErrMsg = '会社名は最小4文字以上にしてください';
@@ -2638,19 +2643,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.representative) {
                   //未入力チェック
                   console.log("(applyCompany)代表者欄が未入力です。");
-                  _this.representativeErrMsg = RepresentativeErrMsg.RepresentativeErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.representative)) {
+                  _this.representativeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["RepresentativeErrMsg"].RepresentativeErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.representative)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)代表者欄は半角英数字で入力してください");
-                  _this.representativeErrMsg = RepresentativeErrMsg.RepresentativeErrMsgHalfNumAlp;
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMaxLen"])(_this.representative, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].REPRESENTATIVE_MAXLEN)) {
+                  _this.representativeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["RepresentativeErrMsg"].RepresentativeErrMsgHalfNumAlp;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMaxLen"])(_this.representative, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].REPRESENTATIVE_MAXLEN)) {
                   // 最大文字数チェック
                   console.log("(applyCompany)代表者欄は20文字以内にしてください");
-                  _this.representativeErrMsg = RepresentativeErrMsg.RepresentativeErrMsgMaxLen;
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMinLen"])(_this.representative, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].REPRESENTATIVE_MINLEN)) {
+                  _this.representativeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["RepresentativeErrMsg"].RepresentativeErrMsgMaxLen;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMinLen"])(_this.representative, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].REPRESENTATIVE_MINLEN)) {
                   // 最小文字数チェック
                   console.log("(applyCompany)代表者欄は最小4文字以内にしてください");
-                  _this.representativeErrMsg = RepresentativeErrMsg.RepresentativeErrMsgMinLen;
+                  _this.representativeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["RepresentativeErrMsg"].RepresentativeErrMsgMinLen;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)代表者欄のバリテーションOKです");
@@ -2660,19 +2665,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.location) {
                   //未入力チェック
                   console.log("(applyCompany)所在地欄が未入力です。");
-                  _this.locationErrMsg = LocationErrMsg.LocationErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.location)) {
+                  _this.locationErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["LocationErrMsg"].LocationErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.location)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)所在地欄は半角英数字で入力してください");
-                  _this.locationErrMsg = LocationErrMsg.LocationErrMsgHalfNumAlp;
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMaxLen"])(_this.location, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].LOCATION_MAXLEN)) {
+                  _this.locationErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["LocationErrMsg"].LocationErrMsgHalfNumAlp;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMaxLen"])(_this.location, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].LOCATION_MAXLEN)) {
                   // 最大文字数チェック
                   console.log("(applyCompany)所在地欄は20文字以内にしてください");
-                  _this.locationErrMsg = LocationErrMsg.LocationErrMsgMaxLen;
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMinLen"])(_this.location, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].LOCATION_MINLEN)) {
+                  _this.locationErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["LocationErrMsg"].LocationErrMsgMaxLen;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMinLen"])(_this.location, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].LOCATION_MINLEN)) {
                   // 最小文字数チェック
                   console.log("(applyCompany)所在地欄は最小4文字以上にしてください");
-                  _this.locationErrMsg = LocationErrMsg.LocationErrMsgMinLen;
+                  _this.locationErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["LocationErrMsg"].LocationErrMsgMinLen;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)所在地欄のバリテーションOKです");
@@ -2682,19 +2687,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.industry) {
                   //未入力チェック
                   console.log("(applyCompany)業界欄が未入力です");
-                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["IndustryErrMsg"].IndustryErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.industry)) {
+                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["IndustryErrMsg"].IndustryErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.industry)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)業界欄は半角英数字で入力してください");
-                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["IndustryErrMsg"].IndustryErrMsgHalfNumAlp;
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMaxLen"])(_this.industry, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].INDUSTRY_MAXLEN)) {
+                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["IndustryErrMsg"].IndustryErrMsgHalfNumAlp;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMaxLen"])(_this.industry, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].INDUSTRY_MAXLEN)) {
                   // 最大文字数チェック
                   console.log("(applyCompany)業界欄は20文字以内にしてください");
-                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["IndustryErrMsg"].IndustryErrMsgMaxLen;
-                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validMinLen"])(_this.industry, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLYCOMPANY_NUM"].INDUSTRY_MINLEN)) {
+                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["IndustryErrMsg"].IndustryErrMsgMaxLen;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validMinLen"])(_this.industry, _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLYCOMPANY_NUM"].INDUSTRY_MINLEN)) {
                   // 最小文字数チェック
                   console.log("(applyCompany)業界欄は最小4文字以上にしてください");
-                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["IndustryErrMsg"].IndustryErrMsgMinLen;
+                  _this.industryErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["IndustryErrMsg"].IndustryErrMsgMinLen;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)業界欄のバリテーションOKです");
@@ -2704,11 +2709,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.yearOfEstablishment) {
                   //未入力チェック
                   console.log("(applyCompany)設立年度欄が未入力です");
-                  _this.yearOfEstablishmentErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["YearOfEstablishmentErrMsg"].YearOfEstablishmentErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.yearOfEstablishment)) {
+                  _this.yearOfEstablishmentErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["YearOfEstablishmentErrMsg"].YearOfEstablishmentErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.yearOfEstablishment)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)設立年度欄は半角英数字で入力してください");
-                  _this.Validation.yearOfEstablishmentErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["YearOfEstablishmentErrMsg"].YearOfEstablishmentErrMsgHalfNumAlp;
+                  _this.yearOfEstablishmentErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["YearOfEstablishmentErrMsg"].YearOfEstablishmentErrMsgHalfNumAlp;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)設立年度欄のバリテーションOKです");
@@ -2718,11 +2723,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.listedYear) {
                   //未入力チェック
                   console.log("(applyCompany)上場年度欄が未入力です");
-                  _this.listedYearErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["ListedYearErrMsg"].ListedYearErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.listedYear)) {
+                  _this.listedYearErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["ListedYearErrMsg"].ListedYearErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.listedYear)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)上場年度欄は半角英数字で入力してください");
-                  _this.listedYearErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["ListedYearErrMsg"].ListedYearErrMsgHalfNumAlp;
+                  _this.listedYearErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["ListedYearErrMsg"].ListedYearErrMsgHalfNumAlp;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)上場年度欄のバリテーションOKです");
@@ -2732,11 +2737,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.numberOfEmployees) {
                   //未入力チェック
                   console.log("(applyCompany)従業員数欄が未入力です");
-                  _this.numberOfEmployeesErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["NumberOfEmployeesErrMsg"].NumberOfEmployeesErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.numberOfEmployees)) {
+                  _this.numberOfEmployeesErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["NumberOfEmployeesErrMsg"].NumberOfEmployeesErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.numberOfEmployees)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)従業員数欄は半角英数字で入力してください");
-                  _this.numberOfEmployeesErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["NumberOfEmployeesErrMsg"].NumberOfEmployeesErrMsgHalfNumAlp;
+                  _this.numberOfEmployeesErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["NumberOfEmployeesErrMsg"].NumberOfEmployeesErrMsgHalfNumAlp;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)従業員数欄のバリテーションOKです");
@@ -2746,11 +2751,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.averageAnnualIncome) {
                   //未入力チェック
                   console.log("(applyCompany)平均年収欄が未入力です。");
-                  _this.averageAnnualIncomeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["AverageAnnualIncomeErrMsg"].AverageAnnualIncomeErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.averageAnnualIncome)) {
+                  _this.averageAnnualIncomeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["AverageAnnualIncomeErrMsg"].AverageAnnualIncomeErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.averageAnnualIncome)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)平均年収は半角英数字で入力してください");
-                  _this.averageAnnualIncomeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["AverageAnnualIncomeErrMsg"].AverageAnnualIncomeErrMsgHalfNumAlp;
+                  _this.averageAnnualIncomeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["AverageAnnualIncomeErrMsg"].AverageAnnualIncomeErrMsgHalfNumAlp;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)平均年収のバリテーションOKです");
@@ -2760,11 +2765,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (!_this.averageAge) {
                   //未入力チェック
                   console.log("(applyCompany)平均年齢欄が未入力です");
-                  _this.averageAgeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["AverageAgeErrMsg"].AverageAgeErrMsgEmpty;
-                } else if (!Object(_utils_validate__WEBPACK_IMPORTED_MODULE_2__["validHalfNumAlp"])(_this.averageAge)) {
+                  _this.averageAgeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["AverageAgeErrMsg"].AverageAgeErrMsgEmpty;
+                } else if (Object(_utils_validate__WEBPACK_IMPORTED_MODULE_3__["validHalfNumAlp"])(_this.averageAge)) {
                   // 半角英数時チェック
                   console.log("(applyCompany)平均年齢は半角英数字で入力してください");
-                  _this.averageAgeErrMsg = AverageAgeErrMsgEmpty.AverageAgeErrMsgHalfNumAlp;
+                  _this.averageAgeErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["AverageAgeErrMsg"].AverageAgeErrMsgHalfNumAlp;
                 } else {
                   //バリテーションがOKな場合
                   console.log("(applyCompany)平均年齢のバリテーションOKです");
@@ -2774,17 +2779,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (_this.companyNameErrMsg === '' && _this.representativeErrMsg === '' && _this.locationErrMsg === '' && _this.industryErrMsg === '' && _this.yearOfEstablishmentErrMsg === '') {
                   _this.sendFlgOne = true;
+                }
+
+                if (_this.listedYearErrMsg === '' && _this.numberOfEmployeesErrMsg === '' && _this.averageAnnualIncomeErrMsg === '' && _this.averageAgeErrMsg === '') {
                   _this.sendFlgTwo = true;
                 } // バリテーションが通っているかを確認。
 
 
                 if (!(_this.sendFlgOne === true && _this.sendFlgTwo === true)) {
-                  _context.next = 40;
+                  _context.next = 41;
                   break;
                 }
 
                 console.log("ユーザー登録用バリテーションOKです。");
-                _context.prev = 12;
+                _context.prev = 13;
                 _this.isSubmit = true; // this.signUpButton = SIGNUP_BUTTON.REGISTERING_BUTTON;
                 // TODO:ロード画面実装
 
@@ -2810,36 +2818,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   averageAnnualIncome: _this.averageAnnualIncome,
                   averageAge: _this.averageAge
                 };
-                _context.next = 26;
+                _context.next = 27;
                 return axios.post('/api/applyCompany', applyCompanyParams);
 
-              case 26:
-                _this.applyCompany = _context.sent;
-                console.dir(_this.applyCompany);
-                _this.submitButton = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLY_COMPANY_BUTTON"].REGISTER_BUTTON;
+              case 27:
+                _this.applyCompanyInfo = _context.sent;
+                console.dir(_this.applyCompanyInfo);
+                _this.submitButton = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLY_COMPANY_BUTTON"].REGISTER_BUTTON;
                 _this.isSubmit = false;
 
                 _this.$store.dispatch("tool/clearLoading");
 
-                _this.$router.push("/mypage/".concat(Cookies.get('user_id')));
+                _this.$router.push("/MyPage/".concat(js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('user_id')));
 
-                _context.next = 40;
+                _context.next = 41;
                 break;
 
-              case 34:
-                _context.prev = 34;
-                _context.t0 = _context["catch"](12);
+              case 35:
+                _context.prev = 35;
+                _context.t0 = _context["catch"](13);
                 console.log("登録処理中に例外エラーが発生しました。");
-                _this.commonErrMsg = CommonErrMsg.commonErrMsg;
-                _this.signUpButton = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_1__["APPLY_COMPANY_BUTTON"].REGISTER_BUTTON;
+                _this.commonErrMsg = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["CommonErrMsg"].commonErrMsg;
+                _this.submitButton = _utils_applyCompany_mapping__WEBPACK_IMPORTED_MODULE_2__["APPLY_COMPANY_BUTTON"].REGISTER_BUTTON;
                 _this.isSubmit = false;
 
-              case 40:
+              case 41:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[12, 34]]);
+        }, _callee, null, [[13, 35]]);
       }))();
     }
   }
@@ -25595,7 +25603,7 @@ function validTel(tel) {
  */
 
 function validHalfNumAlp(halfNumAlp) {
-  var re = /^[0-9a-zA-Z]*$/;
+  var re = /^[A-Z]*$/;
   return re.test(halfNumAlp);
 }
 /**

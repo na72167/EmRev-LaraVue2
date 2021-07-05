@@ -88,7 +88,7 @@ export function validTel(tel){
  * 半角英数字であるかを検証にする
  */
 export function validHalfNumAlp(halfNumAlp){
-  const re = /^[0-9a-zA-Z]*$/
+  const re = /^[A-Z]*$/
   return re.test(halfNumAlp);
 }
 
