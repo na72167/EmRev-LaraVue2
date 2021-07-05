@@ -7,14 +7,13 @@
   </h1>
 </template>
 
-<script lang="ts" scoped>
-import { Component,Prop,Vue} from 'vue-property-decorator';
-import { HeaderLogo } from '@/store/models.d';
-@Component
-export default class HeaderTitle extends Vue {
-
-  @Prop(Array)
-  private headerTitle!: HeaderLogo[];
-
+<script scoped>
+export default {
+  props: {
+    headerTitle: {
+      type: Array,
+      required: true
+    }
+  },
 }
 </script>

@@ -1,11 +1,8 @@
 <template>
-  <div>
-    MypeUserProfile
-  </div>
+  <div>MypeUserProfile</div>
 </template>
-<script lang="ts" scoped>
-import { Component, Vue } from 'vue-property-decorator';
 
-@Component
-export default class MypeUserProfile extends Vue {}
+<script scoped>
+export default {
+}
 </script>

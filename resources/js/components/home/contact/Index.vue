@@ -1,11 +1,8 @@
 <template>
-  <div>contact</div>
+  <div>contactt</div>
 </template>
 
-<script lang="ts" scoped>
-import { Component, Vue } from 'vue-property-decorator';
-
-@Component
-export default class Contact extends Vue {
+<script scoped>
+export default {
 }
 </script>

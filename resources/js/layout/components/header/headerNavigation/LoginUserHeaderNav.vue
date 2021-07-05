@@ -1,40 +1,49 @@
 
 <template>
   <!-- TODO:表示がうまくいっていない -->
-  <nav class="header__nav" v-if="headerMenu">
+  <nav class="header__nav">
     <!-- v-for・v-ifで表示させてもいいかも -->
-    <li class="header__nav-list" @click="switchMenuState()">{{headerMenuLoggedIn[0].text}}</li>
+    <li class="header__nav-list" @click="switchMenuState">{{ headerMenu[0].text }}</li>
       <!-- TODO:ここ問題あり -->
-      <router-link :to="headerMenuLoggedIn[1].link" class="menuAbout__itemWrap-lineNone">
-        <li class="header__nav-list" @click="switchMenuState()">{{headerMenuLoggedIn[1].text}}</li>
+      <router-link :to="headerMenu[1].link" class="menuAbout__itemWrap-lineNone">
+        <li class="header__nav-list">{{ headerMenu[1].text }}</li>
       </router-link>
-    <li class="header__nav-list" @click="logout">{{headerMenuLoggedIn[2].text}}</li>
+    <li class="header__nav-list" @click="logout">{{ headerMenu[2].text }}</li>
   </nav>
 </template>
 
-<script lang="ts" scoped>
-import { Component,Prop,Vue } from 'vue-property-decorator';
-import { toolStoreModule } from '@/store/modules/tool';
-import { HeaderMenus,AboutMenus } from '@/store/models.d';
-import { headerMenuLoggedIn } from '@/utils/header';
-import { OpenAboutMenu } from '@/store/models.d';
+<script scoped>
+import Cookies from "js-cookie";
+import { mapState } from "vuex";
 
-@Component
-export default class LoginUserHeaderNav extends Vue {
-
-  private aboutMenuState: OpenAboutMenu = false;
-  private switchingMenuState?: OpenAboutMenu;
-
-  private headerMenu?: HeaderMenus[] = headerMenuLoggedIn;
-
-  @Prop(Array)
-  private aboutMenu?: AboutMenus[];
-
-  public switchMenuState(){
-    // aboutMenuState内の要素を反転させる。
-    this.switchingMenuState = this.aboutMenuState === false ? 'openAboutMenu' : false;
-    toolStoreModule.switchMenuComponent(this.switchingMenuState);
+export default {
+  computed: {
+    ...mapState({
+      aboutMenuState: state => state.tool.aboutMenuState
+    }),
+  },
+  props: {
+    headerMenu: {
+      type: String,
+      required: true
+    },
+  },
+  methods: {
+    switchMenuState() {
+      this.switchingMenuState = this.aboutMenuState === false ? 'openAboutMenu' : false;
+      this.$store.dispatch("tool/changeAboutMenuState",this.switchingMenuState);
+    },
+    logout() {
+      // TODO:動作未確認
+      Cookies.remove('user_id');
+      Cookies.remove('email');
+      Cookies.remove('roll');
+      this.$store.dispatch("header/setHeaderMenuGuests");
+      this.$router.push('/');
+    },
+    changeSignUpComp() {
+      this.$store.dispatch("tool/setSignUpCompInfo");
+    },
   }
-
 }
 </script>
