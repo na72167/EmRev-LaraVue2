@@ -122,10 +122,11 @@
 </template>
 
 <script scoped>
+import Cookies from "js-cookie";
 import { APPLYCOMPANY_NUM,APPLY_COMPANY_BUTTON,CompanyNameFormErrMsg,IndustryErrMsg,
-YearOfEstablishmentErrMsg,ListedYearErrMsg,NumberOfEmployeesErrMsg,AverageAnnualIncomeErrMsg,
-AverageAgeErrMsg } from '@/utils/applyCompany-mapping';
-import { validHalfNumAlp,validMaxLen,validMinLen } from '@/utils/validate';
+YearOfEstablishmentErrMsg,ListedYearErrMsg,NumberOfEmployeesErrMsg,RepresentativeErrMsg,
+AverageAnnualIncomeErrMsg,AverageAgeErrMsg,LocationErrMsg,CommonErrMsg } from '@/utils/applyCompany-mapping';
+import { validHalfNumAlp,validMaxLen,validMinLen } from '@/utils/validate';validHalfNumAlp
 
 export default {
   data () {
@@ -155,6 +156,8 @@ export default {
 
       applyCompanyCommonErrMsg: '',
 
+      applyCompanyInfo: '',
+
       // フラグに書き換え
       sendFlgOne: false,
       sendFlgTwo: false,
@@ -175,7 +178,7 @@ export default {
         //未入力チェック
         console.log("(applyCompany)会社名が未入力です");
         this.companyNameErrMsg = CompanyNameFormErrMsg.CompanyNameErrMsgEmpty
-      } else if(!validHalfNumAlp(this.companyName)){
+      } else if(validHalfNumAlp(this.companyName)){
         // 半角英数時チェック
         console.log("(applyCompany)会社名は半角英数字で入力してください");
         this.companyNameErrMsg = '会社名は半角英数字で入力してください'
@@ -198,7 +201,7 @@ export default {
         //未入力チェック
         console.log("(applyCompany)代表者欄が未入力です。");
         this.representativeErrMsg = RepresentativeErrMsg.RepresentativeErrMsgEmpty
-      } else if(!validHalfNumAlp(this.representative)){
+      } else if(validHalfNumAlp(this.representative)){
         // 半角英数時チェック
         console.log("(applyCompany)代表者欄は半角英数字で入力してください");
         this.representativeErrMsg = RepresentativeErrMsg.RepresentativeErrMsgHalfNumAlp
@@ -220,7 +223,7 @@ export default {
         //未入力チェック
         console.log("(applyCompany)所在地欄が未入力です。");
         this.locationErrMsg = LocationErrMsg.LocationErrMsgEmpty
-      } else if(!validHalfNumAlp(this.location)){
+      } else if(validHalfNumAlp(this.location)){
         // 半角英数時チェック
         console.log("(applyCompany)所在地欄は半角英数字で入力してください");
         this.locationErrMsg = LocationErrMsg.LocationErrMsgHalfNumAlp
@@ -242,7 +245,7 @@ export default {
         //未入力チェック
         console.log("(applyCompany)業界欄が未入力です");
         this.industryErrMsg = IndustryErrMsg.IndustryErrMsgEmpty
-      } else if(!validHalfNumAlp(this.industry)){
+      } else if(validHalfNumAlp(this.industry)){
         // 半角英数時チェック
         console.log("(applyCompany)業界欄は半角英数字で入力してください");
         this.industryErrMsg = IndustryErrMsg.IndustryErrMsgHalfNumAlp
@@ -264,10 +267,10 @@ export default {
         //未入力チェック
         console.log("(applyCompany)設立年度欄が未入力です");
         this.yearOfEstablishmentErrMsg = YearOfEstablishmentErrMsg.YearOfEstablishmentErrMsgEmpty
-      } else if(!validHalfNumAlp(this.yearOfEstablishment)){
+      } else if(validHalfNumAlp(this.yearOfEstablishment)){
         // 半角英数時チェック
         console.log("(applyCompany)設立年度欄は半角英数字で入力してください");
-        this.Validation.yearOfEstablishmentErrMsg = YearOfEstablishmentErrMsg.YearOfEstablishmentErrMsgHalfNumAlp
+        this.yearOfEstablishmentErrMsg = YearOfEstablishmentErrMsg.YearOfEstablishmentErrMsgHalfNumAlp
       } else {
         //バリテーションがOKな場合
         console.log("(applyCompany)設立年度欄のバリテーションOKです");
@@ -278,7 +281,7 @@ export default {
         //未入力チェック
         console.log("(applyCompany)上場年度欄が未入力です");
         this.listedYearErrMsg = ListedYearErrMsg.ListedYearErrMsgEmpty
-      } else if(!validHalfNumAlp(this.listedYear)){
+      } else if(validHalfNumAlp(this.listedYear)){
         // 半角英数時チェック
         console.log("(applyCompany)上場年度欄は半角英数字で入力してください");
         this.listedYearErrMsg = ListedYearErrMsg.ListedYearErrMsgHalfNumAlp
@@ -292,7 +295,7 @@ export default {
         //未入力チェック
         console.log("(applyCompany)従業員数欄が未入力です");
         this.numberOfEmployeesErrMsg = NumberOfEmployeesErrMsg.NumberOfEmployeesErrMsgEmpty
-      } else if(!validHalfNumAlp(this.numberOfEmployees)){
+      } else if(validHalfNumAlp(this.numberOfEmployees)){
         // 半角英数時チェック
         console.log("(applyCompany)従業員数欄は半角英数字で入力してください");
         this.numberOfEmployeesErrMsg = NumberOfEmployeesErrMsg.NumberOfEmployeesErrMsgHalfNumAlp
@@ -306,7 +309,7 @@ export default {
         //未入力チェック
         console.log("(applyCompany)平均年収欄が未入力です。");
         this.averageAnnualIncomeErrMsg = AverageAnnualIncomeErrMsg.AverageAnnualIncomeErrMsgEmpty
-      } else if(!validHalfNumAlp(this.averageAnnualIncome)){
+      } else if(validHalfNumAlp(this.averageAnnualIncome)){
         // 半角英数時チェック
         console.log("(applyCompany)平均年収は半角英数字で入力してください");
         this.averageAnnualIncomeErrMsg = AverageAnnualIncomeErrMsg.AverageAnnualIncomeErrMsgHalfNumAlp
@@ -320,10 +323,10 @@ export default {
         //未入力チェック
         console.log("(applyCompany)平均年齢欄が未入力です");
         this.averageAgeErrMsg = AverageAgeErrMsg.AverageAgeErrMsgEmpty
-      } else if(!validHalfNumAlp(this.averageAge)){
+      } else if(validHalfNumAlp(this.averageAge)){
         // 半角英数時チェック
         console.log("(applyCompany)平均年齢は半角英数字で入力してください");
-        this.averageAgeErrMsg = AverageAgeErrMsgEmpty.AverageAgeErrMsgHalfNumAlp
+        this.averageAgeErrMsg = AverageAgeErrMsg.AverageAgeErrMsgHalfNumAlp
       } else {
         //バリテーションがOKな場合
         console.log("(applyCompany)平均年齢のバリテーションOKです");
@@ -334,6 +337,10 @@ export default {
       if(this.companyNameErrMsg === '' && this.representativeErrMsg === '' && this.locationErrMsg === ''
       && this.industryErrMsg === '' && this.yearOfEstablishmentErrMsg === ''){
         this.sendFlgOne = true;
+      }
+
+      if(this.listedYearErrMsg === '' && this.numberOfEmployeesErrMsg === '' &&
+      this.averageAnnualIncomeErrMsg === '' && this.averageAgeErrMsg === '' ){
         this.sendFlgTwo = true;
       }
 
@@ -371,19 +378,19 @@ export default {
             averageAge: this.averageAge,
           }
 
-          this.applyCompany = await axios.post('/api/applyCompany',applyCompanyParams);
-          console.dir(this.applyCompany);
+          this.applyCompanyInfo = await axios.post('/api/applyCompany',applyCompanyParams);
+          console.dir(this.applyCompanyInfo);
 
           this.submitButton = APPLY_COMPANY_BUTTON.REGISTER_BUTTON;
           this.isSubmit = false;
           this.$store.dispatch("tool/clearLoading");
 
-          this.$router.push(`/mypage/${Cookies.get('user_id')}`)
+          this.$router.push(`/MyPage/${Cookies.get('user_id')}`)
 
         } catch (e) {
           console.log("登録処理中に例外エラーが発生しました。");
           this.commonErrMsg = CommonErrMsg.commonErrMsg;
-          this.signUpButton = APPLY_COMPANY_BUTTON.REGISTER_BUTTON;
+          this.submitButton = APPLY_COMPANY_BUTTON.REGISTER_BUTTON;
           this.isSubmit = false;
         }// 上手く動かない。
         // finally {
