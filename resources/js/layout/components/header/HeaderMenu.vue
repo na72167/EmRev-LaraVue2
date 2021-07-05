@@ -1,7 +1,7 @@
 <template>
 
   <span>
-    <nev class="header__nav" v-if="user">
+    <nav class="header__nav" v-if="user">
       <LoginUserHeaderNav
         :headerMenu="headerMenu"
       />
@@ -9,7 +9,7 @@
         :class="aboutMenuState"
         :aboutMenus="aboutMenus"
       />
-    </nev>
+    </nav>
 
     <!-- TODO:・・・コンポーネントの再定義が上手く出来ていない。 -->
     <nav class="header__nav" v-if="!user">

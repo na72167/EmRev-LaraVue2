@@ -118,7 +118,7 @@ export default {
       //   console.log("(signUp)メールアドレスが重複しています");
       //   this.Validation.signUpEmailErrMsg = EmailFormErrMsg.emailErrMsgEmailDup
       // }
-       else if(this.emailErrMsg === ''){
+      else if(this.emailErrMsg === ''){
         //バリテーションがOKな場合
         console.log("(signUp)メールアドレスのバリテーションOKです");
         this.sendEmailFlg = true;

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/home/index'
+import ApplyCompany from '@/views/applyCompany/index'
 import MyPage from '@/views/myPage/index'
 import { AuthFilter } from '@/router/auth';
 
@@ -13,6 +14,10 @@ const routes = [
   {
     path: '/',
     component: Home
+  },
+  {
+    path: '/ApplyCompany',
+    component: ApplyCompany
   },
   {
     path: '/MyPage/:id',

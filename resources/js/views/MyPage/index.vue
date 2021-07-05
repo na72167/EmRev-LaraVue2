@@ -1,5 +1,13 @@
 <template>
-  <div>
+  <div>マイページ</div>
+</template>
+
+<script scoped>
+export default {
+}
+</script>
+
+<!-- <div>
     <Intro/>
     <DesignSpace/>
     <MiddleElement/>
@@ -7,12 +15,6 @@
     <MypeMyReviewList/>
     <MypeDmList/>
     <MypeMyFavoriteList/>
-  </div>
-</template>
-
-<script scoped>
-export default {
-}
-</script>
+  </div> -->
 
 
