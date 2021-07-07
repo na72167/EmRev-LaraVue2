@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/home/index'
-import ApplyCompany from '@/views/applyCompany/index'
+import ApplyCompany from '@/views/applyCompany/Index'
+import ReviewPosting from '@/views/reviewPosting/Index'
 import MyPage from '@/views/myPage/index'
 import { AuthFilter } from '@/router/auth';
 
@@ -18,6 +19,11 @@ const routes = [
   {
     path: '/ApplyCompany',
     component: ApplyCompany
+  },
+  {
+    path: '/ReviewPosting',
+    // path: '/ReviewPosting/:p',
+    component: ReviewPosting
   },
   {
     path: '/MyPage/:id',

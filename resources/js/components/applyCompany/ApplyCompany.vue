@@ -367,15 +367,15 @@ export default {
           this.sendFlgTwo = false;
 
           const applyCompanyParams = {
-            companyName: this.companyName,
+            company_name: this.companyName,
             representative: this.representative,
             location: this.location,
             industry: this.industry,
-            yearOfEstablishment: this.yearOfEstablishment,
-            listedYear: this.listedYear,
-            numberOfEmployees: this.numberOfEmployees,
-            averageAnnualIncome: this.averageAnnualIncome,
-            averageAge: this.averageAge,
+            year_of_establishment: this.yearOfEstablishment,
+            listed_year: this.listedYear,
+            number_of_employees: this.numberOfEmployees,
+            average_annual_income: this.averageAnnualIncome,
+            average_age: this.averageAge,
           }
 
           this.applyCompanyInfo = await axios.post('/api/applyCompany',applyCompanyParams);

@@ -23,7 +23,9 @@ Route::post('/passwordReceive', 'Auth\AuthController@passwordReceive')->name('pa
 Route::post('/contributorRegistration', 'roll\changeOfAuthorityController@contributorRegistration')->name('contributorRegistration');
 
 // 会社情報検索
-Route::get('/searchCompanyDate', 'companyDate\searchCompanyDateController@searchCompanyDate')->name('searchCompanyDate');
+// TODO: まだ途中
+Route::post('/reviewCompanySearch', 'companyDate\searchCompanyDateController@searchCompanyDate')->name('reviewCompanySearch');
+
 
 // 会社情報登録申請
 Route::post('/applyCompany', 'applyCompany\applyCompanyController@applyCompany')->name('applyCompany');

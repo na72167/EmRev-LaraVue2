@@ -4,7 +4,7 @@ export const headerTitle = [
 
 export const headerMenuLoggedIn = [
   { type: 'LoggedIn', text: 'MENU', link: '#' },
-  { type: 'LoggedIn', text: 'REVIEW POSTING', link: '/SelectReviewCompany' },
+  { type: 'LoggedIn', text: 'REVIEW POSTING', link: '`/reviewPosting/${this.query}`' },
   { type: 'LoggedIn', text: 'LOGOUT', link: '#' },
 ];
 
