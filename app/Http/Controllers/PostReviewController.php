@@ -10,7 +10,7 @@ use App\CompanyInformation;
 class postReviewController extends Controller
 {
     //レビュー検索用アクション
-    protected function serchRegistCompany(Request $request){
+    protected function searchCompanyDate(Request $request){
         //ユーザーのログイン状況を確認。
         log::debug('ログインの確認をします。');
         if(!Auth::check()){

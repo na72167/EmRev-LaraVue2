@@ -16,7 +16,17 @@
 </template>
 
 <script scoped>
+import { mapGetters } from "vuex";
+
 export default {
+  data() {
+    return {
+      users: [],
+      // query: {
+      //   p: pagination,
+      // }
+    };
+  },
   props: {
     aboutMenus: {
       type: Array,
@@ -28,7 +38,15 @@ export default {
       this.switchingMenuState = this.aboutMenuState === false ? 'openAboutMenu' : false;
       this.$store.dispatch("tool/changeAboutMenuState",this.switchingMenuState);
     },
-  }
+  },
+  computed: {
+    // 検索用コンポーネントを経由して更新した表示データを取得する。
+    ...mapGetters({
+      pagination: 'pagination/paginationState',
+    })
+  },
+
+
 }
 </script>
 

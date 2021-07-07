@@ -1,6 +1,7 @@
 <template>
 
   <span>
+
     <nav class="header__nav" v-if="user">
       <LoginUserHeaderNav
         :headerMenu="headerMenu"
@@ -21,6 +22,7 @@
         :aboutMenus="aboutMenus"
       />
     </nav>
+
   </span>
 
 </template>
