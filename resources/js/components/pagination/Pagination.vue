@@ -1,156 +1,115 @@
 <template>
+  <!-- メニューバー -->
+  <div class="rigisRigisterReviewList__pageTransition">
+    <div class="rigisRigisterReviewList__pageTransition-contentWrap">
+      <span class="rigisRigisterReviewList__pageTransition-leftArrow">◁</span>
 
-  <div>
+        <div class="rigisRigisterReviewList__pageTransition-guideNumber">
 
+          <li
+            v-for="page in frontPageRange"
+            :key="page"
+          >{{ page }}</li>
+          <li
+            v-for="page in middlePageRange"
+            :key="page"
+          >{{ page }}</li>
+          <li
+            v-for="page in endPageRange"
+            :key="page"
+          >{{ page }}</li>
 
-  <ul class="pagination">
-
-    <li
-      class="inactive"
-      :class="(current_page == 1) ? 'disabled' : ''"
-      @click="changePage(current_page-1)"
-    >«</li>
-
-    <li
-      v-for="page in frontPageRange"
-      :key="page"
-      @click="changePage(page)"
-      :class="(isCurrent(page)) ? 'active' : 'inactive'"
-    >{{ page }}</li>
-    <li v-show="front_dot" class="inactive">...</li>
-    <li
-      v-for="page in middlePageRange"
-      :key="page"
-      @click="changePage(page)"
-      :class="(isCurrent(page)) ? 'active' : 'inactive'"
-    >{{ page }}</li>
-    <li v-show="end_dot" class="inactive">...</li>
-    <li
-      v-for="page in endPageRange"
-      :key="page"
-      @click="changePage(page)"
-      :class="(isCurrent(page)) ? 'active' : 'inactive'"
-    >{{ page }}</li>
-
-    <li
-      class="inactive"
-      :class="(current_page >= last_page) ? 'disabled' : ''"
-      @click="changePage(current_page+1)"
-    >»</li>
-  </ul>
-
+        </div>
+      <span class="rigisRigisterReviewList__pageTransition-rightArrow">▷</span>
+    </div>
   </div>
+
 
 </template>
 <script>
-import axios from "axios";
-import { PAGINATION } from '@/utils/pagination-mapping'
-
 export default {
   data() {
     return {
-    users: [],
-    current_page: 1,
-    last_page: "",
-    range: 5,
-    front_dot: false,
-    end_dot: false
-  };
+      companyDate: [],
+      current_page: 2,
+      last_page: 20,
+      range: 5,
+    };
   },
   computed: {
-
     frontPageRange() {
-      if (!this.sizeCheck) {
-        return this.calRange(1, this.last_page);
-      }
       return this.calRange(1, 2);
     },
-
     middlePageRange() {
-      if (!this.sizeCheck) return [];
       let start = "";
       let end = "";
       if (this.current_page <= this.range) {
         start = 3;
         end = this.range + 2;
-        this.front_dot = false;
-        this.end_dot = true;
       } else if (this.current_page > this.last_page - this.range) {
         start = this.last_page - this.range - 1;
         end = this.last_page - 2;
-        this.front_dot = true;
-        this.end_dot = false;
       } else {
         start = this.current_page - Math.floor(this.range / 2);
         end = this.current_page + Math.floor(this.range / 2);
-        this.front_dot = true;
-        this.end_dot = true;
       }
       return this.calRange(start, end);
     },
-
     endPageRange() {
       return this.calRange(this.last_page - 1, this.last_page);
     },
-    sizeCheck() {
-      if (this.last_page < this.size) {
-        return false;
-      }
-      return true;
-    },
-
   },
-
   methods: {
-    async fetchData() {
-
-      const result = {
-        data: [
-          { id: 1, name: "test1" },
-          { id: 2, name: "test3" },
-          { id: 3, name: "test3" },
-          { id: 4, name: "test4" },
-          { id: 5, name: "test5" },
-        ],
-        current_page: [
-          { id: 1 },
-        ],
-        last_page: [
-          { id: 5 },
-        ],
-      };
-
-      const users = result;
-      this.current_page = users.current_page;
-      this.last_page = users.last_page;
-      this.users = users.data;
-      console.dir(this.users);
+    async getUsers() {
+      const result = await axios.post('/api/reviewCompanySearch');
+      console.dir(result);
+      const companyDate = result.data;
+      console.dir(companyDate);
+      // this.current_page = users.current_page;
+      this.last_page = companyDate.last_page;
+      this.companyDate = companyDate.data;
     },
-
     calRange(start, end) {
       const range = [];
       for (let i = start; i <= end; i++) {
         range.push(i);
       }
-      return range;
+    return range;
     },
-
-    changePage(page) {
-    if (page > 0 && page <= this.last_page) {
-      this.current_page = page;
-      this.getUsers();
-    }
   },
-
-  isCurrent(page) {
-    return page === this.current_page;
+  created() {
+    this.getUsers();
   },
-
-  },
-
-  created: function() {
-    this.fetchData();
-  },
-}
+};
 </script>
 
+<style lang="scss" scope>
+.revliReviewList{
+  height: 100%;
+  width: 720px;
+  padding: 20px 20px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  margin-top: -950px;
+  margin-left: 870px;
+  margin-right: auto;
+
+  &__pageTransition{
+    height: 50px;
+    border-top: 1px solid #b4becb;
+    border-bottom: 1px solid #b4becb;
+  }
+  &__pageTransition-contentWrap{
+    width: 80px;
+    margin: 10px auto 0;
+  }
+  &__pageTransition-leftArrow{
+    float: left;
+  }
+  &__pageTransition-guideNumber{
+    float: left;
+  }
+  &__pageTransition-rightArrow{
+    float: left;
+  }
+}

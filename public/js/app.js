@@ -2867,58 +2867,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    settingsReviewCompany: {
-      type: Object,
-      required: true
-    },
-    reviewCompanys: {
-      type: Object,
-      required: true
-    }
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -3052,9 +3001,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_pagination_mapping__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/utils/pagination-mapping */ "./resources/js/utils/pagination-mapping.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3089,119 +3035,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: [],
-      current_page: 1,
-      last_page: "",
-      range: 5,
-      front_dot: false,
-      end_dot: false
+      companyDate: [],
+      current_page: 2,
+      last_page: 20,
+      range: 5
     };
   },
   computed: {
     frontPageRange: function frontPageRange() {
-      if (!this.sizeCheck) {
-        return this.calRange(1, this.last_page);
-      }
-
       return this.calRange(1, 2);
     },
     middlePageRange: function middlePageRange() {
-      if (!this.sizeCheck) return [];
       var start = "";
       var end = "";
 
       if (this.current_page <= this.range) {
         start = 3;
         end = this.range + 2;
-        this.front_dot = false;
-        this.end_dot = true;
       } else if (this.current_page > this.last_page - this.range) {
         start = this.last_page - this.range - 1;
         end = this.last_page - 2;
-        this.front_dot = true;
-        this.end_dot = false;
       } else {
         start = this.current_page - Math.floor(this.range / 2);
         end = this.current_page + Math.floor(this.range / 2);
-        this.front_dot = true;
-        this.end_dot = true;
       }
 
       return this.calRange(start, end);
     },
     endPageRange: function endPageRange() {
       return this.calRange(this.last_page - 1, this.last_page);
-    },
-    sizeCheck: function sizeCheck() {
-      if (this.last_page < this.size) {
-        return false;
-      }
-
-      return true;
     }
   },
   methods: {
-    fetchData: function fetchData() {
+    getUsers: function getUsers() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var result, users;
+        var result, companyDate;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                result = {
-                  data: [{
-                    id: 1,
-                    name: "test1"
-                  }, {
-                    id: 2,
-                    name: "test3"
-                  }, {
-                    id: 3,
-                    name: "test3"
-                  }, {
-                    id: 4,
-                    name: "test4"
-                  }, {
-                    id: 5,
-                    name: "test5"
-                  }],
-                  current_page: [{
-                    id: 1
-                  }],
-                  last_page: [{
-                    id: 5
-                  }]
-                };
-                users = result;
-                _this.current_page = users.current_page;
-                _this.last_page = users.last_page;
-                _this.users = users.data;
-                console.dir(_this.users);
+                _context.next = 2;
+                return axios.post('/api/reviewCompanySearch');
 
-              case 6:
+              case 2:
+                result = _context.sent;
+                console.dir(result);
+                companyDate = result.data;
+                console.dir(companyDate); // this.current_page = users.current_page;
+
+                _this.last_page = companyDate.last_page;
+                _this.companyDate = companyDate.data;
+
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -3217,19 +3107,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return range;
-    },
-    changePage: function changePage(page) {
-      if (page > 0 && page <= this.last_page) {
-        this.current_page = page;
-        this.getUsers();
-      }
-    },
-    isCurrent: function isCurrent(page) {
-      return page === this.current_page;
     }
   },
   created: function created() {
-    this.fetchData();
+    this.getUsers();
   }
 });
 
@@ -6891,163 +6772,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.reviewCompanys, function(reviewCompany) {
-      return _c("div", { key: reviewCompany.id }, [
-        _c("div", { staticClass: "rigisRigisterReviewList__mainContent" }, [
-          _c(
-            "div",
-            { staticClass: "rigisRigisterReviewList__imgComInfoWrap" },
-            [
-              _vm._m(0, true),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "rigisRigisterReviewList__companyWrap" },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "rigisRigisterReviewList__industryClassification"
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.settingsReviewCompany.industryClassification)
-                      ),
-                      _c("span", [_vm._v(_vm._s(reviewCompany.industry))])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "rigisRigisterReviewList__companyName" },
-                    [
-                      _vm._v(_vm._s(_vm.settingsReviewCompany.companyName)),
-                      _c("span", [_vm._v(_vm._s(reviewCompany.company_name))])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "rigisRigisterReviewList__location" },
-                    [
-                      _vm._v(_vm._s(_vm.settingsReviewCompany.location)),
-                      _c("span", [_vm._v(_vm._s(reviewCompany.location))])
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "rigisRigisterReviewList__reviewLink" },
-                [
-                  _vm._v(_vm._s(_vm.settingsReviewCompany.numberOfReviews)),
-                  _c("span", [_vm._v(_vm._s(reviewCompany.numberOfReviews))]),
-                  _vm._v(")" + _vm._s(_vm.settingsReviewCompany.case))
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "rigisRigisterReviewList__userDetail" }, [
-            _c("div", { staticClass: "rigisRigisterReviewList__name" }, [
-              _vm._v("(総合的な会社の印象が出力される予定)")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "rigisRigisterReviewList__dmIncumbentWrap" },
-              [
-                _c("div", { staticClass: "rigisRigisterReviewList__age" }, [
-                  _vm._v(_vm._s(_vm.settingsReviewCompany.postedDate)),
-                  _c("span", [_vm._v(_vm._s(reviewCompany.created_at))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "rigisRigisterReviewList__dm" }, [
-                  _vm._v(_vm._s(_vm.settingsReviewCompany.generalComment)),
-                  _vm._m(1, true),
-                  _c(
-                    "h1",
-                    { staticClass: "rigisRigisterReviewList__userProfLink" },
-                    [_vm._v(_vm._s(_vm.settingsReviewCompany.details))]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "rigisRigisterReviewList__userNameAgeFavoliteWrap"
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "rigisRigisterReviewList__userNameAgeWrap" },
-                  [
-                    _vm._v(":"),
-                    _c("span", [_vm._v("ユーザー名")]),
-                    _vm._v(_vm._s(_vm.settingsReviewCompany.mr)),
-                    _c("span", [_vm._v("〇〇")]),
-                    _vm._v(_vm._s(_vm.settingsReviewCompany.age))
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "rigisRigisterReviewList__favorite" },
-                  [_vm._v(_vm._s(_vm.settingReviewCompany.star))]
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(2, true)
-        ])
-      ])
-    }),
-    0
-  )
+  return _c("div")
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "rigisRigisterReviewList__imgStyle" }, [
-      _c("img", {
-        staticClass: "rigisRigisterReviewList__img",
-        attrs: {
-          src: "<?php echo etc::showImg(etc::sanitize($val['pic1'])); ?>"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _vm._v("サンプルサンプルサンプルサンプル"),
-      _c("br"),
-      _vm._v("サンプルサンプルサンプルサンプルサ...")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { attrs: { method: "post" } }, [
-      _c("input", {
-        staticClass: "#",
-        attrs: { type: "submit", value: "settingsReviewCompany.makeReview" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -7232,120 +6959,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "rigisRigisterReviewList__pageTransition" }, [
     _c(
-      "ul",
-      { staticClass: "pagination" },
+      "div",
+      { staticClass: "rigisRigisterReviewList__pageTransition-contentWrap" },
       [
         _c(
-          "li",
-          {
-            staticClass: "inactive",
-            class: _vm.current_page == 1 ? "disabled" : "",
-            on: {
-              click: function($event) {
-                return _vm.changePage(_vm.current_page - 1)
-              }
-            }
-          },
-          [_vm._v("«")]
+          "span",
+          { staticClass: "rigisRigisterReviewList__pageTransition-leftArrow" },
+          [_vm._v("◁")]
         ),
         _vm._v(" "),
-        _vm._l(_vm.frontPageRange, function(page) {
-          return _c(
-            "li",
-            {
-              key: page,
-              class: _vm.isCurrent(page) ? "active" : "inactive",
-              on: {
-                click: function($event) {
-                  return _vm.changePage(page)
-                }
-              }
-            },
-            [_vm._v(_vm._s(page))]
-          )
-        }),
-        _vm._v(" "),
         _c(
-          "li",
+          "div",
           {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.front_dot,
-                expression: "front_dot"
-              }
-            ],
-            staticClass: "inactive"
+            staticClass: "rigisRigisterReviewList__pageTransition-guideNumber"
           },
-          [_vm._v("...")]
+          [
+            _vm._l(_vm.frontPageRange, function(page) {
+              return _c("li", { key: page }, [_vm._v(_vm._s(page))])
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.middlePageRange, function(page) {
+              return _c("li", { key: page }, [_vm._v(_vm._s(page))])
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.endPageRange, function(page) {
+              return _c("li", { key: page }, [_vm._v(_vm._s(page))])
+            })
+          ],
+          2
         ),
         _vm._v(" "),
-        _vm._l(_vm.middlePageRange, function(page) {
-          return _c(
-            "li",
-            {
-              key: page,
-              class: _vm.isCurrent(page) ? "active" : "inactive",
-              on: {
-                click: function($event) {
-                  return _vm.changePage(page)
-                }
-              }
-            },
-            [_vm._v(_vm._s(page))]
-          )
-        }),
-        _vm._v(" "),
         _c(
-          "li",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.end_dot,
-                expression: "end_dot"
-              }
-            ],
-            staticClass: "inactive"
-          },
-          [_vm._v("...")]
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.endPageRange, function(page) {
-          return _c(
-            "li",
-            {
-              key: page,
-              class: _vm.isCurrent(page) ? "active" : "inactive",
-              on: {
-                click: function($event) {
-                  return _vm.changePage(page)
-                }
-              }
-            },
-            [_vm._v(_vm._s(page))]
-          )
-        }),
-        _vm._v(" "),
-        _c(
-          "li",
-          {
-            staticClass: "inactive",
-            class: _vm.current_page >= _vm.last_page ? "disabled" : "",
-            on: {
-              click: function($event) {
-                return _vm.changePage(_vm.current_page + 1)
-              }
-            }
-          },
-          [_vm._v("»")]
+          "span",
+          { staticClass: "rigisRigisterReviewList__pageTransition-rightArrow" },
+          [_vm._v("▷")]
         )
-      ],
-      2
+      ]
     )
   ])
 }
@@ -26796,22 +26447,6 @@ var aboutMenus = [{
   text: '退会する',
   link: '#'
 }];
-
-/***/ }),
-
-/***/ "./resources/js/utils/pagination-mapping.js":
-/*!**************************************************!*\
-  !*** ./resources/js/utils/pagination-mapping.js ***!
-  \**************************************************/
-/*! exports provided: PAGINATION */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAGINATION", function() { return PAGINATION; });
-var PAGINATION = {
-  DefaultPageLinkNum: 5
-};
 
 /***/ }),
 
