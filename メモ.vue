@@ -6,7 +6,6 @@
       @click="changePage(current_page-1)"
     >«</li>
 
-
     <li
       v-for="page in frontPageRange"
       :key="page"
@@ -28,7 +27,6 @@
       :class="(isCurrent(page)) ? 'active' : 'inactive'"
     >{{ page }}</li>
 
-
     <li
       class="inactive"
       :class="(current_page >= last_page) ? 'disabled' : ''"
@@ -41,7 +39,6 @@
 
 <script>
 export default {
-
   data() {
     return {
       data() {
@@ -57,7 +54,6 @@ export default {
       },
     };
   },
-
   computed: {
     frontPageRange() {
       if (!this.sizeCheck) {
@@ -92,12 +88,6 @@ export default {
       return this.calRange(this.last_page - 1, this.last_page);
     },
 
-    sizeCheck() {
-      if (this.last_page < this.size) {
-        return false;
-      }
-      return true;
-    },
   },
 
 
@@ -118,6 +108,7 @@ export default {
       this.last_page = users.last_page;
       this.users = users.data;
     },
+
     calRange(start, end) {
       const range = [];
       for (let i = start; i <= end; i++) {
@@ -125,6 +116,7 @@ export default {
       }
     return range;
     },
+
     changePage(page) {
       // バリテーション的な意味合いのif
       if (page > 0 && page <= this.last_page) {
@@ -133,9 +125,18 @@ export default {
         this.getUsers();
       }
     },
+
     isCurrent(page) {
       return page === this.current_page;
     },
+
+    sizeCheck() {
+      if (this.last_page < this.size) {
+        return false;
+      }
+      return true;
+    },
+
   },
   created() {
     this.getUsers();
