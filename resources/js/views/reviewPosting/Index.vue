@@ -1,8 +1,15 @@
+// レビュー登録機能の最初の会社選択画面
 <template>
   <div>
-    <Intro/>
-    <CompanySearchForm/>
-    <CompanySort/>
+    <Intro
+      :introTextTitle="introTextTitle"
+      :introTextSub="introTextSub"
+      :introImg="introImg"
+    />
+    <CompanySearchForm
+    />
+    <CompanySort
+    />
     <SelectReviewCompany
       v-if="reviewCompanys && initializing"
       :settingsReviewCompany="settingsReviewCompany"
@@ -18,12 +25,17 @@ import CompanySearchForm from '@/components/searchForm/CompanySearchForm'
 import CompanySort from '@/components/searchForm/CompanySort'
 import SelectReviewCompany from '@/components/selectMenu/SelectMenu'
 import { SETTINGS_REVIEW_COMPANY } from '@/utils/selectMenu/selectReviewCompany-mapping'
+import introImg from '@/assets/img/docs.png'
+//imgファイルはpassをコンポーネントに送るより画像データを直接送った方が良いかも。
 
 export default {
   data: function() {
     return {
       initializing: false,
       settingsReviewCompany: SETTINGS_REVIEW_COMPANY,
+      introTextTitle: SETTINGS_REVIEW_COMPANY.introTextTitle,
+      introTextSub: SETTINGS_REVIEW_COMPANY.introTextSub,
+      introImg: introImg,
     }
   },
   components: {
@@ -34,9 +46,8 @@ export default {
   },
   methods: {
 
-    //次はここから(ページネーションに関係するEmitの処理を書く)
-    //その後検索用コンポーネントを書いて、検索結果一覧に関係するStoreを更新する。
-
+    // 次はここから(ページネーションに関係するEmitの処理を書く)
+    // その後検索用コンポーネントを書いて、検索結果一覧に関係するStoreを更新する。
     // movePage(id) {
     //   // search URL queries saving vuex
     //   const queries = window.location.hash.split(/(?=\?)/g);
@@ -54,6 +65,7 @@ export default {
         // ここで下のreviewCompanys用の処理に関係するデータの取得。セットを行う。
         // TODO:検索部分まで一通り出来たら取り掛かる。
         await this.$store.dispatch("reviewPostings/setReviewCompanys");
+
         this.$store.dispatch("tool/clearLoading");
         this.initializing = true;
       } catch (e) {
@@ -67,7 +79,7 @@ export default {
     this.fetchData();
   },
   computed: {
-    // 検索用コンポーネントを経由して更新した表示データを取得する。
+    // 初期データや検索用コンポーネントを経由して更新した表示データを取得する。
     ...mapGetters({
       reviewCompanys: 'reviewPostings/reviewCompanys',
     })
