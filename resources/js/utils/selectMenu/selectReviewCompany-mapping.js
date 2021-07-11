@@ -2,6 +2,11 @@
 
 //サインアップ時のバリテーション関係
 export const SETTINGS_REVIEW_COMPANY = {
+  //intro
+  pageTitle: 'レビュー会社選択画面',
+  introTextTitle: 'ReviewCompanySelection',
+  introTextSub: 'レビュー会社選択画面',
+  //form
   title: 'Register Review List',
   industryClassification:'業界分類:',
   companyName:'会社名:',

@@ -4,6 +4,8 @@ import Home from '@/views/home/index'
 import ApplyCompany from '@/views/applyCompany/Index'
 import ReviewPosting from '@/views/reviewPosting/Index'
 import MyPage from '@/views/myPage/index'
+import ReviewRegisterForm from '@/views/reviewPosting/reviewRegister/Index'
+
 import { AuthFilter } from '@/router/auth';
 
 // VueRouterプラグインを使用する
@@ -22,8 +24,13 @@ const routes = [
   },
   {
     path: '/ReviewPosting',
+    // 下のやつはページ用
     // path: '/ReviewPosting/:p',
     component: ReviewPosting
+  },
+  {
+    path: '/ReviewRegisterForm/:company_id',
+    component: ReviewRegisterForm
   },
   {
     path: '/MyPage/:id',

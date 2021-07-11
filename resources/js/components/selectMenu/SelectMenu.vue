@@ -6,11 +6,11 @@
         <h3>検索結果:<span>{{ reviewCompanys.data.count }}</span>件</h3>
       </div>
       <DataTable
-        :reviewCompanys="reviewCompanys.data.data"
+        :reviewCompanys="reviewCompanys.data.data.data"
         :settingsReviewCompany="settingsReviewCompany"
       />
+      <!-- 保留 -->
       <Pagination
-
       />
     </div>
   </div>
@@ -22,10 +22,12 @@ import Pagination from '@/components/pagination/Pagination'
 
 export default {
   props: {
+    // 名前関係
     settingsReviewCompany: {
       type: Object,
       required: true
     },
+    // 会社情報を纏めたデータ
     reviewCompanys: {
       type: Object,
       required: true

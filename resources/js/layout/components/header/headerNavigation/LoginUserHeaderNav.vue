@@ -4,7 +4,6 @@
   <nav class="header__nav">
     <!-- v-for・v-ifで表示させてもいいかも -->
     <li class="header__nav-list" @click="switchMenuState">{{ headerMenu[0].text }}</li>
-      <!-- TODO:ここ問題あり -->
       <router-link :to="headerMenu[1].link" class="menuAbout__itemWrap-lineNone">
         <li class="header__nav-list">{{ headerMenu[1].text }}</li>
       </router-link>
